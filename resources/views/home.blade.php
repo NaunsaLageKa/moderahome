@@ -551,15 +551,6 @@
                     <h3>Office</h3>
                 </div>
                 
-                <div class="category-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🌿</div>
-                    <h3>Outdoor</h3>
-                </div>
-                
-                <div class="category-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">💡</div>
-                    <h3>Lighting</h3>
-                </div>
             </div>
         </div>
     </section>
@@ -571,23 +562,23 @@
             
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('/images/products/armchair.jpg');"></div>
+                    <div class="product-image" style="background-image: url('/images/products/desk.jpg');"></div>
                     <div class="product-info">
-                        <div class="product-name">Elegant Armchair</div>
+                        <div class="product-name">Exclusive Desk</div>
                         <div class="product-price">$299.99</div>
                     </div>
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('/images/products/desk.jpg');"></div>
+                    <div class="product-image" style="background-image: url('/images/products/wood).jpg');"></div>
                     <div class="product-info">
-                        <div class="product-name">Minimalist Desk</div>
+                        <div class="product-name">Dining Wood Table</div>
                         <div class="product-price">$450.00</div>
                     </div>
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('/images/products/dining-table.jpg');"></div>
+                    <div class="product-image" style="background-image: url('/images/products/round.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Round Dining Table</div>
                         <div class="product-price">$799.00</div>
@@ -595,7 +586,7 @@
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('/images/products/sofa.jpg');"></div>
+                    <div class="product-image" style="background-image: url('/images/products/gray.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Comfy Gray Sofa</div>
                         <div class="product-price">$1,250.00</div>
