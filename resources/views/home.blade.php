@@ -120,7 +120,9 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
             padding: 8rem 2rem 4rem;
             text-align: center;
             position: relative;
@@ -341,6 +343,8 @@
             justify-content: center;
             color: #9CA3AF;
             font-size: 3rem;
+            background-size: cover;
+            background-position: center;
         }
         
         .product-info {
@@ -567,7 +571,7 @@
             
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-image">🪑</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
                     <div class="product-info">
                         <div class="product-name">Elegant Armchair</div>
                         <div class="product-price">$299.99</div>
@@ -575,7 +579,7 @@
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image">🪑</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
                     <div class="product-info">
                         <div class="product-name">Minimalist Desk</div>
                         <div class="product-price">$450.00</div>
@@ -583,7 +587,7 @@
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image">🪑</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
                     <div class="product-info">
                         <div class="product-name">Round Dining Table</div>
                         <div class="product-price">$799.00</div>
@@ -591,7 +595,7 @@
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image">🪑</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
                     <div class="product-info">
                         <div class="product-name">Comfy Gray Sofa</div>
                         <div class="product-price">$1,250.00</div>
