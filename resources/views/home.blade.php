@@ -571,7 +571,7 @@
             
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-image" style="background-image: url('/images/products/armchair.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Elegant Armchair</div>
                         <div class="product-price">$299.99</div>
@@ -579,7 +579,7 @@
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-image" style="background-image: url('/images/products/desk.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Minimalist Desk</div>
                         <div class="product-price">$450.00</div>
@@ -587,7 +587,7 @@
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-image" style="background-image: url('/images/products/dining-table.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Round Dining Table</div>
                         <div class="product-price">$799.00</div>
@@ -595,7 +595,7 @@
                 </div>
                 
                 <div class="product-card">
-                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-image" style="background-image: url('/images/products/sofa.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Comfy Gray Sofa</div>
                         <div class="product-price">$1,250.00</div>
