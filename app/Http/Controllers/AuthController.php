@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/dashboard');
         }
 
         return back()->withErrors([
@@ -80,7 +80,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Welcome to ModeraHome! Your account has been created successfully.');
+        return redirect('/dashboard')->with('success', 'Welcome to ModeraHome! Your account has been created successfully.');
     }
 
     /**
