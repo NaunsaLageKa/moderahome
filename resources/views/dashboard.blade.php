@@ -1,311 +1,164 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="light" lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ModeraHome Dashboard</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ModeraHome - My Account</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #F7F9FC;
-            color: #111827;
-            min-height: 100vh;
-            display: flex;
-        }
-        .sidebar {
-            width: 240px;
-            background: white;
-            border-right: 1px solid #E5E7EB;
-            padding: 2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        .brand {
-            font-weight: 700;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .brand span {
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
-            background: #2563EB;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .profile {
-            text-align: center;
-        }
-        .avatar {
-            width: 76px;
-            height: 76px;
-            border-radius: 50%;
-            background: #DBEAFE;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 0.5rem;
-        }
-        .menu {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-        .menu a,
-        .menu button {
-            background: none;
-            border: none;
-            text-align: left;
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border-radius: 12px;
-            color: #4B5563;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        .menu a.active {
-            background: #E0E7FF;
-            color: #1D4ED8;
-        }
-        .menu a:hover,
-        .menu button:hover {
-            background: #F3F4F6;
-        }
-        .sidebar-bottom {
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-        .main {
-            flex: 1;
-            padding: 2rem 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .search {
-            width: 320px;
-            border-radius: 999px;
-            border: 1px solid #E5E7EB;
-            padding: 0.85rem 1.25rem;
-            background: white;
-        }
-        .hero-card {
-            background: white;
-            border-radius: 24px;
-            padding: 1.75rem;
-            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
-        }
-        .hero-card h1 {
-            font-size: 1.75rem;
-            margin-bottom: 0.25rem;
-        }
-        .hero-card p {
-            color: #6B7280;
-            margin-bottom: 1.25rem;
-        }
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        .category-card {
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            height: 220px;
-            box-shadow: 0 20px 30px rgba(15, 23, 42, 0.12);
-        }
-        .category-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65));
-        }
-        .category-card h3 {
-            position: absolute;
-            bottom: 1.25rem;
-            left: 1.5rem;
-            color: white;
-            font-size: 1.15rem;
-            font-weight: 600;
-            z-index: 2;
-        }
-        .category-card .image {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-        .products-section {
-            background: white;
-            border-radius: 24px;
-            padding: 1.75rem;
-            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
-        }
-        .products-section h2 {
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 1.25rem;
-        }
-        .product-card {
-            border-radius: 18px;
-            background: #F9FAFB;
-            padding: 1rem;
-            box-shadow: inset 0 0 0 1px rgba(15,23,42,0.04);
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        .product-card .image {
-            height: 150px;
-            border-radius: 14px;
-            background-size: cover;
-            background-position: center;
-        }
-        .product-card .price {
-            font-weight: 700;
-        }
-        .product-card button {
-            border: none;
-            background: #2563EB;
-            color: white;
-            border-radius: 999px;
-            padding: 0.5rem 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            align-self: flex-start;
-        }
-        .product-card button:hover { background: #1D4ED8; }
-        @media(max-width:1024px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #E5E7EB; flex-direction: row; flex-wrap: wrap; gap: 1rem; }
-            .main { padding: 1.5rem; }
-            header { flex-direction: column; gap: 1rem; align-items: flex-start; }
-            .search { width: 100%; }
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
         }
     </style>
 </head>
-<body>
-    <aside class="sidebar">
-        <div class="brand"><span>🏠</span> ModeraHome</div>
-        <div class="profile">
-            <div class="avatar">{{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}</div>
-            <strong>{{ Auth::user()->name }}</strong>
-            <small style="color:#6B7280;">{{ Auth::user()->email }}</small>
-        </div>
-        <nav class="menu">
-            <a href="#" class="active">Dashboard</a>
-            <a href="#">Profile Settings</a>
-            <a href="#">Recently Viewed</a>
-        </nav>
-        <div class="sidebar-bottom">
-            <a href="#" class="menu">Support</a>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
-        </div>
-    </aside>
-    <main class="main">
-        <header>
-            <div>
-                <h3 style="font-weight:600;">Dashboard</h3>
+<body class="font-display bg-background-light dark:bg-background-dark">
+    <div class="relative flex min-h-screen w-full">
+        <aside class="flex w-64 flex-col bg-white dark:bg-gray-900/50 dark:border-r dark:border-gray-800 p-4 border-r border-gray-200">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="bg-primary/20 rounded-full size-10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary text-2xl">chair</span>
+                </div>
+                <div class="flex flex-col">
+                    <h1 class="text-gray-900 dark:text-white text-base font-bold leading-normal">ModeraHome</h1>
+                </div>
             </div>
-            <div style="display:flex; gap:1rem; align-items:center;">
-                <input class="search" type="text" placeholder="Search for furniture, styles, and more..." />
-                <div style="width:42px;height:42px;border-radius:50%;background:white;border:1px solid #E5E7EB;display:flex;align-items:center;justify-content:center;">🔔</div>
+            <div class="flex flex-col items-center gap-2 mb-8 border-b border-gray-200 dark:border-gray-800 pb-8">
+                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-20" data-alt="Avatar of the current user" style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuA1MFqiGW6Iq2pZteFelfkxT2X_pq_mywSETE47l4eWsuQaH_JG0-Cqqykmfl98ctAfvyLKf5gGYdWI5RJ93GIH3EEBWHnFBPj4_vXRyrnmaPlsT6ql8Uttxo-SP5JiLCDJUKYq_XwRM_sozPEHC1_LYBifSzbjH-QUhwSn3n72z2xQU0RSGKMJdG86MBdWzKwJB2Vda_vPAdR8dMRrik0HNw0luOi3hz0Wxi6I4sGaq4lbTPGeFLcWlXVgn-E-5gpaVtfegKM5ESM');"></div>
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white mt-2">{{ Auth::user()->name ?? 'Olivia Smith' }}</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ Auth::user()->email ?? 'olivia.smith@email.com' }}</p>
             </div>
-        </header>
+            <nav class="flex flex-col gap-2 flex-grow">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary" href="#">
+                    <span class="material-symbols-outlined">settings</span>
+                    <p class="text-sm font-medium leading-normal">Profile Settings</p>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+                    <span class="material-symbols-outlined">history</span>
+                    <p class="text-sm font-medium leading-normal">Recently Viewed</p>
+                </a>
+            </nav>
+            <div class="flex flex-col gap-1 border-t border-gray-200 dark:border-gray-800 pt-4">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+                    <span class="material-symbols-outlined">help</span>
+                    <p class="text-sm font-medium leading-normal">Support</p>
+                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 w-full">
+                        <span class="material-symbols-outlined">logout</span>
+                        <p class="text-sm font-medium leading-normal">Logout</p>
+                    </button>
+                </form>
+            </div>
+        </aside>
+        <main class="flex-1 flex flex-col">
+            <header class="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 px-10 py-3 bg-white dark:bg-gray-900/50">
+                <div class="flex items-center gap-8">
+                    <h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Dashboard</h2>
+                </div>
+                <div class="flex flex-1 justify-end items-center gap-4">
+                    <button class="flex cursor-pointer items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                        <span class="material-symbols-outlined text-xl">notifications</span>
+                    </button>
+                </div>
+            </header>
+            <div class="p-10 flex-1 overflow-y-auto">
+                <div class="max-w-xl mx-auto mb-10 text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Hello, {{ Auth::user()->name ?? 'Olivia!' }}</h2>
+                    <p class="text-center text-gray-600 dark:text-gray-400 mt-2">What are you looking for today?</p>
+                    <div class="relative mt-6">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                            <span class="material-symbols-outlined text-gray-500">search</span>
+                        </div>
+                        <input class="w-full h-14 pl-12 pr-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Search for furniture, styles, and more..." type="text" />
+                    </div>
+                </div>
 
-        <div class="hero-card">
-            <p style="color:#6B7280;">Hello, {{ Auth::user()->name ?? 'Guest' }}!</p>
-            <h1>What are you looking for today?</h1>
-            <p>Discover personalized recommendations curated just for you.</p>
-            <div class="category-grid" style="margin-top:1.25rem;">
-                <div class="category-card">
-                    <div class="image" style="background-image:url('/images/categories/livingRoom.jpg');"></div>
-                    <h3>Living Room</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    @php
+                        $categories = [
+                            ['title' => 'Living Room', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBG7diHekXGAyziipeQfjUrVZTZceHnRvbuavAIfU97JDxeBwrOKfGedegGCQRN2fZh-djNWHUU3L65tgIsaVufJLDkjHB6sCdm9xmhPteDkJr2J0IERZ2X3prMX3R-vwiudwlcYZ15TyAa-o7-xQyExip5s-HJXjyhlGwtoyuUd0_peiRCtC2dj5knGOcjfmXry6xI9ug7rzMN6QWTs5s-Q692i2iO_WXyvhR493nbOa8wqGqEMimgoLbZsrJtYC0Z1oWRFmgEOUs'],
+                            ['title' => 'Bedroom', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBCBpuIWEnYekqAfplFerYod7C_rE5iCMndC-8EqSpXVnxW0-mT7tFi9jAUxE-tKZiuz4GbYxt-npK2j3fRYtNTQ0JL5PJbqlMZqanBoY8T0ko8kl7_54om-KuH2Am0mNUQ16MVxVGMXxVjg8guF3_Uc8ABKg0y8ZbxxanEJVonIKNQ6HiPPSh6QJ9BuxzMp5kD2BFT2DyMHTwle2arKtmOJgbDzN_0_ETc7tDgmk3L_Sz8-nxkAr40Pwk-1uLATyhwE19_CyhdXCw'],
+                            ['title' => 'Dining', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBJEbobAiCcKUnDIKy3O8asCiQdxlHQhzzmvffJf95IWCCmzPXReuxoFAAmHVjtsmhzV33tcw5zT4cQiHMx6paqoH76P3giOf9Cx9Apntd5Kn7yalq3eOvikHM05VptJxuGQXttUqw8NGeWsNu5tScUUO8LcIvBZGXAytwttGi216dL3FdNvVF7MHPiQLBsmegsrNBGuahbmLOAlsldye3HiULq7fV8hTz-xFk_B_t0bHawPO8-msouXU2ffi9-GyWokyLqcePk9U'],
+                            ['title' => 'Office', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAYX0h-NjBqPVPqcNwRDpnicIUYic11Jc0MB7t2LjaQZ2xT26vBNzw5TsS3jzRJWIPlYVHoukp4aPVpn3iNIjpwXy7r6SONn5yec83FDawVDcsO_8Dj6e3uFpBIDRanjizsDzq4ObrrMXptQDOQUUVpCO8aZNmRG5zLw6nee-Y1IbSalQLeLnyloC_w24MPibjeNusCyg395Rwmo03CIUuKmCg8BZ1mH5pjDcaP28RQ01FXjUu8cGPzP8TXGg_-eDZ6uoRXvQxs3pc'],
+                        ];
+                    @endphp
+                    @foreach ($categories as $category)
+                        <a class="group relative flex flex-col justify-end overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 h-80" href="#">
+                            <img alt="{{ $category['title'] }}" class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" src="{{ $category['image'] }}" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="relative z-10 p-6">
+                                <h3 class="text-2xl font-bold text-white">{{ $category['title'] }}</h3>
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
-                <div class="category-card">
-                    <div class="image" style="background-image:url('/images/categories/bedroom.png');"></div>
-                    <h3>Bedroom</h3>
-                </div>
-                <div class="category-card">
-                    <div class="image" style="background-image:url('/images/categories/dish.jpg');"></div>
-                    <h3>Dining</h3>
-                </div>
-                <div class="category-card">
-                    <div class="image" style="background-image:url('/images/categories/office.png');"></div>
-                    <h3>Office</h3>
-                </div>
-            </div>
-        </div>
 
-        <div class="products-section">
-            <h2>You Might Also Like</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="image" style="background-image:url('/images/products/wood).jpg');"></div>
-                    <strong>Modern Oak Chair</strong>
-                    <small style="color:#6B7280;">Sleek & comfortable</small>
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <span class="price">$180</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="image" style="background-image:url('/images/products/gray.jpg');"></div>
-                    <strong>Velvet Accent Sofa</strong>
-                    <small style="color:#6B7280;">Plush and luxurious</small>
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <span class="price">$750</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="image" style="background-image:url('/images/products/round.jpg');"></div>
-                    <strong>Minimalist Coffee Table</strong>
-                    <small style="color:#6B7280;">Clean and modern design</small>
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <span class="price">$250</span>
-                        <button>Add to Cart</button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="image" style="background-image:url('/images/products/desk.jpg');"></div>
-                    <strong>Industrial Bookshelf</strong>
-                    <small style="color:#6B7280;">Wood and metal fusion</small>
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <span class="price">$420</span>
-                        <button>Add to Cart</button>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">You Might Also Like</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        @php
+                            $products = [
+                                ['title' => 'Modern Oak Chair', 'desc' => 'Sleek & comfortable', 'price' => '$180', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBwjV_IfTbh1G8R8o99YQ4khIU95-4AnKlPxs8RnpNuO4C29evXRDGHgr0SL5ZV_PbvU7A--w1TLHzdpHeTNvpeBQanNE9hDG0aoFwDRxjS67oEOuAy0abbShrlOOLqKY61eq4pdjTS1wuNcJgM3L-vaOObbr-o8HFNlOBehLHNYJwWh56oqVgtv_JTzmlI0yuY9180m-Z9i4fA37kwrsD-1ifBkUbZ-O2KhdhebmaSZtiuTy_o8SSH8ZgMgoCMx4ZC_ZZ3DuJ2AQ'],
+                                ['title' => 'Velvet Accent Sofa', 'desc' => 'Plush and luxurious', 'price' => '$750', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDS1nTJ0OaVu-gOUGf1ucrN50kOHlrskgnqoMFKUfJqtdFFp94h1T19zHTYQMTkxgdFY1S889ieQy7JbZvc98tP0d_H_abgYCQjt-4PeEBDCZbqOLO7mWv4iNEO9o5aWdRmYM09PzOCa7UB143ibbrMyTx2qdk-Btq25tzAdAfrcjVRF1ST3Crmh3ggFIUNGCm-uEqoY7dZiYEVUKBom1bmyHWzVO1Wk0U6FOmHrqHcFk35A29CtQ8RwkKnfx8av5v_jdNXGzwdJEo'],
+                                ['title' => 'Minimalist Coffee Table', 'desc' => 'Clean and modern design', 'price' => '$250', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBxlfnGx4RJA19Hgh4-_sZdjGBuikPCq8RyoMj8hAIYimyJu5YMZQcjfqpM-9gzlrNnbkR6K1tKhUqG0LNOiglS_rBNNpzzTv68Du5d2xfRHyBRAtPW_h5yDuPyhLqZEI71Za2Rlejt3q0y_Mbxe8GWIR9MdN5S3XxMRuWQ-Y6Dp2w6QT39UdoTfRTOJIBZ7ujesRfouFbBddrAd73qxVhnRhqwuQJU0RnnF6hNdG0ScCfY33G6PWsTnhpg97OQlqhFXplPirAZ4N0'],
+                                ['title' => 'Industrial Bookshelf', 'desc' => 'Wood and metal fusion', 'price' => '$420', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDO8MWLzNmQKtwL284CkrVb32lkweh9mhlisExgbPCfRsbeXchzPkT9b_plj1KREZo68tJiAWOaq-9QhZ4QpaRmnvjGeomBsC2setJMVn3Y2MRaPDit4A1SDyjz703_jUwF7iaYeovyCVrzYj52DWg8FB-BMNltT7MbVQhvRaYZAm7r0ACxL1I0QIqD-HuQV6N4QDuzJCvJRMci7FrQ-6det4i-p9O4EJggWU_QDgIAyTWgxHsXgY-QhbW9J3-5drSTRQ732FQ6tf0'],
+                            ];
+                        @endphp
+                        @foreach ($products as $product)
+                            <div class="group flex flex-col bg-white dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+                                <div class="relative">
+                                    <img alt="{{ $product['title'] }}" class="h-56 w-full object-cover" src="{{ $product['image'] }}" />
+                                    <button class="absolute top-3 right-3 flex items-center justify-center size-8 rounded-full bg-white/80 dark:bg-black/50 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors">
+                                        <span class="material-symbols-outlined text-xl">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="p-4 flex-1 flex flex-col">
+                                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{ $product['title'] }}</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ $product['desc'] }}</p>
+                                    <div class="flex items-center justify-between mt-4">
+                                        <p class="text-lg font-bold text-primary">{{ $product['price'] }}</p>
+                                        <button class="flex items-center justify-center size-9 bg-primary/20 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
+                                            <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 </body>
 </html>
 
