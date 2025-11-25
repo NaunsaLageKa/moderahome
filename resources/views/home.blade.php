@@ -532,22 +532,18 @@
             
             <div class="categories-grid">
                 <div class="category-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🛋️</div>
                     <h3>Living Room</h3>
                 </div>
                 
                 <div class="category-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🛏️</div>
                     <h3>Bedroom</h3>
                 </div>
                 
                 <div class="category-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🍽️</div>
                     <h3>Dining</h3>
                 </div>
                 
                 <div class="category-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">💼</div>
                     <h3>Office</h3>
                 </div>
                 
