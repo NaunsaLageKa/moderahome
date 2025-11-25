@@ -496,19 +496,19 @@
             
             <div class="features">
                 <div class="feature">
-                    <div class="feature-image" style="background-image: url('/images/features/curated.jpg');"></div>
+                    <div class="feature-image" style="background-image: url('/images/features/check.png');"></div>
                     <h3>Curated Designs</h3>
                     <p>Each piece is handpicked for its modern aesthetic and quality craftsmanship.</p>
                 </div>
                 
                 <div class="feature">
-                    <div class="feature-image" style="background-image: url('/images/features/quality.jpg');"></div>
+                    <div class="feature-image" style="background-image: url('/images/features/quality.png');"></div>
                     <h3>Uncompromising Quality</h3>
                     <p>We partner with the best manufacturers to ensure your furniture lasts a lifetime.</p>
                 </div>
                 
                 <div class="feature">
-                    <div class="feature-image" style="background-image: url('/images/features/delivery.jpg');"></div>
+                    <div class="feature-image" style="background-image: url('/images/features/delivery.png');"></div>
                     <h3>Seamless Delivery</h3>
                     <p>Enjoy hassle-free shipping and setup, so you can love your space sooner.</p>
                 </div>
