@@ -227,17 +227,14 @@
             padding: 2rem;
         }
         
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: #3B82F6;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .feature-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
             margin: 0 auto 1rem;
-            color: white;
-            font-size: 1.5rem;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
         
         .feature h3 {
@@ -499,19 +496,19 @@
             
             <div class="features">
                 <div class="feature">
-                    <div class="feature-icon">✓</div>
+                    <div class="feature-image" style="background-image: url('/images/features/curated.jpg');"></div>
                     <h3>Curated Designs</h3>
                     <p>Each piece is handpicked for its modern aesthetic and quality craftsmanship.</p>
                 </div>
                 
                 <div class="feature">
-                    <div class="feature-icon">👍</div>
+                    <div class="feature-image" style="background-image: url('/images/features/quality.jpg');"></div>
                     <h3>Uncompromising Quality</h3>
                     <p>We partner with the best manufacturers to ensure your furniture lasts a lifetime.</p>
                 </div>
                 
                 <div class="feature">
-                    <div class="feature-icon">🚚</div>
+                    <div class="feature-image" style="background-image: url('/images/features/delivery.jpg');"></div>
                     <h3>Seamless Delivery</h3>
                     <p>Enjoy hassle-free shipping and setup, so you can love your space sooner.</p>
                 </div>
@@ -543,22 +540,22 @@
             
             <div class="categories-grid">
                 <div class="category-card">
-                    <div class="category-image" style="background-image: url('/images/categories/living-room.jpg');"></div>
+                    <div class="category-image" style="background-image: url('/images/categories/livingRoom.jpg');"></div>
                     <h3>Living Room</h3>
                 </div>
                 
                 <div class="category-card">
-                    <div class="category-image" style="background-image: url('/images/categories/bedroom.jpg');"></div>
+                    <div class="category-image" style="background-image: url('/images/categories/bedroom.png');"></div>
                     <h3>Bedroom</h3>
                 </div>
                 
                 <div class="category-card">
-                    <div class="category-image" style="background-image: url('/images/categories/dining.jpg');"></div>
+                    <div class="category-image" style="background-image: url('/images/categories/dish.png');"></div>
                     <h3>Dining</h3>
                 </div>
                 
                 <div class="category-card">
-                    <div class="category-image" style="background-image: url('/images/categories/office.jpg');"></div>
+                    <div class="category-image" style="background-image: url('/images/categories/office.png');"></div>
                     <h3>Office</h3>
                 </div>
                 
