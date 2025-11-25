@@ -289,14 +289,25 @@
         
         .category-card {
             background: #F8FAFC;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
-        
+
+        .category-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+        }
+
         .category-card:hover {
             border-color: #3B82F6;
             transform: translateY(-4px);
@@ -532,18 +543,22 @@
             
             <div class="categories-grid">
                 <div class="category-card">
+                    <div class="category-image" style="background-image: url('/images/categories/living-room.jpg');"></div>
                     <h3>Living Room</h3>
                 </div>
                 
                 <div class="category-card">
+                    <div class="category-image" style="background-image: url('/images/categories/bedroom.jpg');"></div>
                     <h3>Bedroom</h3>
                 </div>
                 
                 <div class="category-card">
+                    <div class="category-image" style="background-image: url('/images/categories/dining.jpg');"></div>
                     <h3>Dining</h3>
                 </div>
                 
                 <div class="category-card">
+                    <div class="category-image" style="background-image: url('/images/categories/office.jpg');"></div>
                     <h3>Office</h3>
                 </div>
                 
