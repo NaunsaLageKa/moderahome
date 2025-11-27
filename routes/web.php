@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Models\Post;
 
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/test-post', function () { return Post::with('author')->get(); });
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
