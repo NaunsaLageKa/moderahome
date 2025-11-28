@@ -71,45 +71,85 @@
             flex-direction: column;
             gap: 2rem;
         }
-        .hero {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            height: 360px;
-            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+        .search-section {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
         }
-        .hero img {
+        .search-section h2 {
+            font-size: 1.5rem;
+            color: #64748B;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .search-bar {
+            position: relative;
+            width: 100%;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.5rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 16px;
+            font-size: 1rem;
+            background: white;
+            color: #0F172A;
+            transition: all 0.3s;
+        }
+        .search-bar input:focus {
+            outline: none;
+            border-color: #1D4ED8;
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+        }
+        .search-bar .search-icon {
             position: absolute;
-            inset: 0;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94A3B8;
+            font-size: 1.25rem;
+        }
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .category-button {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 320px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+            text-decoration: none;
+            display: block;
+        }
+        .category-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+            border-color: #1D4ED8;
+        }
+        .category-button img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .hero::after {
+        .category-button::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(120deg, rgba(15,23,42,0.8), rgba(15,23,42,0.4));
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
         }
-        .hero-content {
+        .category-button h3 {
             position: absolute;
-            inset: 0;
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            bottom: 1.5rem;
+            left: 1.5rem;
             color: white;
-            gap: 0.75rem;
-        }
-        .hero-content h1 {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             font-weight: 700;
-        }
-        .hero-content p {
-            max-width: 600px;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.85);
+            z-index: 10;
         }
         .products {
             display: grid;
@@ -190,10 +230,14 @@
             color: #1D4ED8;
             text-decoration: none;
         }
+        @media (max-width: 1200px) {
+            .category-buttons { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 1rem; }
             main { padding: 1.5rem; }
-            .hero-content h1 { font-size: 2rem; }
+            .category-buttons { grid-template-columns: 1fr; }
+            .category-button { height: 240px; }
         }
     </style>
 </head>
@@ -216,14 +260,32 @@
             <a href="{{ route('dashboard') }}">Dashboard</a> &nbsp;/&nbsp; {{ $categoryData['title'] }}
         </div>
 
-        <section class="hero">
-            <img src="{{ $categoryData['image'] }}" alt="{{ $categoryData['title'] }} hero image">
-            <div class="hero-content">
-                <p>Curated selection</p>
-                <h1>{{ $categoryData['title'] }} Collection</h1>
-                <p>Discover pieces chosen for comfort, aesthetics, and everyday living. Browse the latest designs and mix-and-match ideas to elevate your {{ strtolower($categoryData['title']) }}.</p>
+        <section class="search-section">
+            <h2>What are you looking for today?</h2>
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search for furniture, styles, and more...">
             </div>
         </section>
+
+        <div class="category-buttons">
+            <a href="{{ route('category.show', 'living-room') }}" class="category-button">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG7diHekXGAyziipeQfjUrVZTZceHnRvbuavAIfU97JDxeBwrOKfGedegGCQRN2fZh-djNWHUU3L65tgIsaVufJLDkjHB6sCdm9xmhPteDkJr2J0IERZ2X3prMX3R-vwiudwlcYZ15TyAa-o7-xQyExip5s-HJXjyhlGwtoyuUd0_peiRCtC2dj5knGOcjfmXry6xI9ug7rzMN6QWTs5s-Q692i2iO_WXyvhR493nbOa8wqGqEMimgoLbZsrJtYC0Z1oWRFmgEOUs" alt="Living Room">
+                <h3>Living Room</h3>
+            </a>
+            <a href="{{ route('category.show', 'bedroom') }}" class="category-button">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCBpuIWEnYekqAfplFerYod7C_rE5iCMndC-8EqSpXVnxW0-mT7tFi9jAUxE-tKZiuz4GbYxt-npK2j3fRYtNTQ0JL5PJbqlMZqanBoY8T0ko8kl7_54om-KuH2Am0mNUQ16MVxVGMXxVjg8guF3_Uc8ABKg0y8ZbxxanEJVonIKNQ6HiPPSh6QJ9BuxzMp5kD2BFT2DyMHTwle2arKtmOJgbDzN_0_ETc7tDgmk3L_Sz8-nxkAr40Pwk-1uLATyhwE19_CyhdXCw" alt="Bedroom">
+                <h3>Bedroom</h3>
+            </a>
+            <a href="{{ route('category.show', 'dining') }}" class="category-button">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBJEbobAiCcKUnDIKy3O8asCiQdxlHQhzzmvffJf95IWCCmzPXReuxoFAAmHVjtsmhzV33tcw5zT4cQiHMx6paqoH76P3giOf9Cx9Apntd5Kn7yalq3eOvikHM05VptJxuGQXttUqw8NGeWsNu5tScUUO8LcIvBZGXAytwttGi216dL3FdNvVF7MHPiQLBsmegsrNBGuahbmLOAlsldye3HiULq7fV8hTz-xFk_B_t0bHawPO8-msouXU2ffi9-GyWokyLqcePk9U" alt="Dining">
+                <h3>Dining</h3>
+            </a>
+            <a href="{{ route('category.show', 'office') }}" class="category-button">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYX0h-NjBqPVPqcNwRDpnicIUYic11Jc0MB7t2LjaQZ2xT26vBNzw5TsS3jzRJWIPlYVHoukp4aPVpn3iNIjpwXy7r6SONn5yec83FDawVDcsO_8Dj6e3uFpBIDRanjizsDzq4ObrrMXptQDOQUUVpCO8aZNmRG5zLw6nee-Y1IbSalQLeLnyloC_w24MPibjeNusCyg395Rwmo03CIUuKmCg8BZ1mH5pjDcaP28RQ01FXjUu8cGPzP8TXGg_-eDZ6uoRXvQxs3pc" alt="Office">
+                <h3>Office</h3>
+            </a>
+        </div>
 
         <section>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
