@@ -573,7 +573,7 @@
                     <div class="product-image" style="background-image: url('/images/products/desk.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Exclusive Desk</div>
-                        <div class="product-price">$299.99</div>
+                        <div class="product-price">₱299.99</div>
                     </div>
                 </div>
                 
@@ -581,7 +581,7 @@
                     <div class="product-image" style="background-image: url('/images/products/wood).jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Dining Wood Table</div>
-                        <div class="product-price">$450.00</div>
+                        <div class="product-price">₱450.00</div>
                     </div>
                 </div>
                 
@@ -589,7 +589,7 @@
                     <div class="product-image" style="background-image: url('/images/products/round.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Round Dining Table</div>
-                        <div class="product-price">$799.00</div>
+                        <div class="product-price">₱799.00</div>
                     </div>
                 </div>
                 
@@ -597,7 +597,7 @@
                     <div class="product-image" style="background-image: url('/images/products/gray.jpg');"></div>
                     <div class="product-info">
                         <div class="product-name">Comfy Gray Sofa</div>
-                        <div class="product-price">$1,250.00</div>
+                        <div class="product-price">₱1,250.00</div>
                     </div>
                 </div>
             </div>

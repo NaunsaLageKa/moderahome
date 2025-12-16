@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $categoryData['title'] }} Furniture - ModeraHome</title>
+    <title>{{ $category->name }} Furniture - ModeraHome</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
     <style>
@@ -257,7 +257,7 @@
 
     <main>
         <div class="breadcrumbs">
-            <a href="{{ route('dashboard') }}">Dashboard</a> &nbsp;/&nbsp; {{ $categoryData['title'] }}
+            <a href="{{ route('dashboard') }}">Dashboard</a> &nbsp;/&nbsp; {{ $category->name }}
         </div>
 
         <section class="search-section">
@@ -269,27 +269,21 @@
         </section>
 
         <div class="category-buttons">
-            <a href="{{ route('category.show', 'living-room') }}" class="category-button">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG7diHekXGAyziipeQfjUrVZTZceHnRvbuavAIfU97JDxeBwrOKfGedegGCQRN2fZh-djNWHUU3L65tgIsaVufJLDkjHB6sCdm9xmhPteDkJr2J0IERZ2X3prMX3R-vwiudwlcYZ15TyAa-o7-xQyExip5s-HJXjyhlGwtoyuUd0_peiRCtC2dj5knGOcjfmXry6xI9ug7rzMN6QWTs5s-Q692i2iO_WXyvhR493nbOa8wqGqEMimgoLbZsrJtYC0Z1oWRFmgEOUs" alt="Living Room">
-                <h3>Living Room</h3>
-            </a>
-            <a href="{{ route('category.show', 'bedroom') }}" class="category-button">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCBpuIWEnYekqAfplFerYod7C_rE5iCMndC-8EqSpXVnxW0-mT7tFi9jAUxE-tKZiuz4GbYxt-npK2j3fRYtNTQ0JL5PJbqlMZqanBoY8T0ko8kl7_54om-KuH2Am0mNUQ16MVxVGMXxVjg8guF3_Uc8ABKg0y8ZbxxanEJVonIKNQ6HiPPSh6QJ9BuxzMp5kD2BFT2DyMHTwle2arKtmOJgbDzN_0_ETc7tDgmk3L_Sz8-nxkAr40Pwk-1uLATyhwE19_CyhdXCw" alt="Bedroom">
-                <h3>Bedroom</h3>
-            </a>
-            <a href="{{ route('category.show', 'dining') }}" class="category-button">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBJEbobAiCcKUnDIKy3O8asCiQdxlHQhzzmvffJf95IWCCmzPXReuxoFAAmHVjtsmhzV33tcw5zT4cQiHMx6paqoH76P3giOf9Cx9Apntd5Kn7yalq3eOvikHM05VptJxuGQXttUqw8NGeWsNu5tScUUO8LcIvBZGXAytwttGi216dL3FdNvVF7MHPiQLBsmegsrNBGuahbmLOAlsldye3HiULq7fV8hTz-xFk_B_t0bHawPO8-msouXU2ffi9-GyWokyLqcePk9U" alt="Dining">
-                <h3>Dining</h3>
-            </a>
-            <a href="{{ route('category.show', 'office') }}" class="category-button">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYX0h-NjBqPVPqcNwRDpnicIUYic11Jc0MB7t2LjaQZ2xT26vBNzw5TsS3jzRJWIPlYVHoukp4aPVpn3iNIjpwXy7r6SONn5yec83FDawVDcsO_8Dj6e3uFpBIDRanjizsDzq4ObrrMXptQDOQUUVpCO8aZNmRG5zLw6nee-Y1IbSalQLeLnyloC_w24MPibjeNusCyg395Rwmo03CIUuKmCg8BZ1mH5pjDcaP28RQ01FXjUu8cGPzP8TXGg_-eDZ6uoRXvQxs3pc" alt="Office">
-                <h3>Office</h3>
-            </a>
+            @foreach($allCategories as $cat)
+                <a href="{{ route('category.show', $cat->slug) }}" class="category-button">
+                    @if($cat->image)
+                        <img src="{{ asset('storage/' . $cat->image) }}" alt="{{ $cat->name }}">
+                    @else
+                        <div style="width:100%;height:100%;background:linear-gradient(to bottom right, #CBD5E1, #94A3B8);"></div>
+                    @endif
+                    <h3>{{ $cat->name }}</h3>
+                </a>
+            @endforeach
         </div>
 
         <section>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-                <h2 style="font-size:1.5rem;font-weight:700;">Featured {{ $categoryData['title'] }} Pieces</h2>
+                <h2 style="font-size:1.5rem;font-weight:700;">Featured {{ $category->name }} Pieces</h2>
                 <button style="border:none;background:#E0E7FF;color:#1D4ED8;padding:0.5rem 1rem;border-radius:999px;font-weight:600;cursor:pointer;">Filter</button>
             </div>
             @foreach ($products as $chunk)
@@ -297,12 +291,16 @@
                     @foreach ($chunk as $product)
                         @if ($product)
                             <article class="product-card">
-                                <img src="{{ $product['image'] }}" alt="{{ $product['title'] }}">
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                                @else
+                                    <div style="width:100%;height:220px;background:#E2E8F0;display:flex;align-items:center;justify-content:center;color:#94A3B8;">No Image</div>
+                                @endif
                                 <div class="product-info">
-                                    <h3>{{ $product['title'] }}</h3>
-                                    <p>{{ $product['desc'] }}</p>
+                                    <h3>{{ $product->name }}</h3>
+                                    <p>{{ \Illuminate\Support\Str::limit($product->description, 60) }}</p>
                                     <div class="product-footer">
-                                        <span>{{ $product['price'] }}</span>
+                                        <span>₱{{ number_format($product->price, 2) }}</span>
                                         <button>Add to Cart</button>
                                     </div>
                                 </div>

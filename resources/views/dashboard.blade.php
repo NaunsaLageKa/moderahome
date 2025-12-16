@@ -108,20 +108,16 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                    @php
-                        $categories = [
-                            ['key' => 'living-room', 'title' => 'Living Room', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBG7diHekXGAyziipeQfjUrVZTZceHnRvbuavAIfU97JDxeBwrOKfGedegGCQRN2fZh-djNWHUU3L65tgIsaVufJLDkjHB6sCdm9xmhPteDkJr2J0IERZ2X3prMX3R-vwiudwlcYZ15TyAa-o7-xQyExip5s-HJXjyhlGwtoyuUd0_peiRCtC2dj5knGOcjfmXry6xI9ug7rzMN6QWTs5s-Q692i2iO_WXyvhR493nbOa8wqGqEMimgoLbZsrJtYC0Z1oWRFmgEOUs'],
-                            ['key' => 'bedroom', 'title' => 'Bedroom', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBCBpuIWEnYekqAfplFerYod7C_rE5iCMndC-8EqSpXVnxW0-mT7tFi9jAUxE-tKZiuz4GbYxt-npK2j3fRYtNTQ0JL5PJbqlMZqanBoY8T0ko8kl7_54om-KuH2Am0mNUQ16MVxVGMXxVjg8guF3_Uc8ABKg0y8ZbxxanEJVonIKNQ6HiPPSh6QJ9BuxzMp5kD2BFT2DyMHTwle2arKtmOJgbDzN_0_ETc7tDgmk3L_Sz8-nxkAr40Pwk-1uLATyhwE19_CyhdXCw'],
-                            ['key' => 'dining', 'title' => 'Dining', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBJEbobAiCcKUnDIKy3O8asCiQdxlHQhzzmvffJf95IWCCmzPXReuxoFAAmHVjtsmhzV33tcw5zT4cQiHMx6paqoH76P3giOf9Cx9Apntd5Kn7yalq3eOvikHM05VptJxuGQXttUqw8NGeWsNu5tScUUO8LcIvBZGXAytwttGi216dL3FdNvVF7MHPiQLBsmegsrNBGuahbmLOAlsldye3HiULq7fV8hTz-xFk_B_t0bHawPO8-msouXU2ffi9-GyWokyLqcePk9U'],
-                            ['key' => 'office', 'title' => 'Office', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAYX0h-NjBqPVPqcNwRDpnicIUYic11Jc0MB7t2LjaQZ2xT26vBNzw5TsS3jzRJWIPlYVHoukp4aPVpn3iNIjpwXy7r6SONn5yec83FDawVDcsO_8Dj6e3uFpBIDRanjizsDzq4ObrrMXptQDOQUUVpCO8aZNmRG5zLw6nee-Y1IbSalQLeLnyloC_w24MPibjeNusCyg395Rwmo03CIUuKmCg8BZ1mH5pjDcaP28RQ01FXjUu8cGPzP8TXGg_-eDZ6uoRXvQxs3pc'],
-                        ];
-                    @endphp
                     @foreach ($categories as $category)
-                        <a href="{{ route('category.show', $category['key']) }}" class="group relative flex flex-col justify-end overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 h-80">
-                            <img alt="{{ $category['title'] }}" class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" src="{{ $category['image'] }}" />
+                        <a href="{{ route('category.show', $category->slug) }}" class="group relative flex flex-col justify-end overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 h-80">
+                            @if($category->image)
+                                <img alt="{{ $category->name }}" class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" src="{{ asset('storage/' . $category->image) }}" />
+                            @else
+                                <div class="absolute inset-0 bg-gradient-to-br from-gray-300 to-gray-400"></div>
+                            @endif
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <div class="relative z-10 p-6">
-                                <h3 class="text-2xl font-bold text-white">{{ $category['title'] }}</h3>
+                                <h3 class="text-2xl font-bold text-white">{{ $category->name }}</h3>
                             </div>
                         </a>
                     @endforeach
@@ -130,34 +126,36 @@
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">You Might Also Like</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        @php
-                            $products = [
-                                ['title' => 'Modern Oak Chair', 'desc' => 'Sleek & comfortable', 'price' => '$180', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDBwjV_IfTbh1G8R8o99YQ4khIU95-4AnKlPxs8RnpNuO4C29evXRDGHgr0SL5ZV_PbvU7A--w1TLHzdpHeTNvpeBQanNE9hDG0aoFwDRxjS67oEOuAy0abbShrlOOLqKY61eq4pdjTS1wuNcJgM3L-vaOObbr-o8HFNlOBehLHNYJwWh56oqVgtv_JTzmlI0yuY9180m-Z9i4fA37kwrsD-1ifBkUbZ-O2KhdhebmaSZtiuTy_o8SSH8ZgMgoCMx4ZC_ZZ3DuJ2AQ'],
-                                ['title' => 'Velvet Accent Sofa', 'desc' => 'Plush and luxurious', 'price' => '$750', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDS1nTJ0OaVu-gOUGf1ucrN50kOHlrskgnqoMFKUfJqtdFFp94h1T19zHTYQMTkxgdFY1S889ieQy7JbZvc98tP0d_H_abgYCQjt-4PeEBDCZbqOLO7mWv4iNEO9o5aWdRmYM09PzOCa7UB143ibbrMyTx2qdk-Btq25tzAdAfrcjVRF1ST3Crmh3ggFIUNGCm-uEqoY7dZiYEVUKBom1bmyHWzVO1Wk0U6FOmHrqHcFk35A29CtQ8RwkKnfx8av5v_jdNXGzwdJEo'],
-                                ['title' => 'Minimalist Coffee Table', 'desc' => 'Clean and modern design', 'price' => '$250', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBxlfnGx4RJA19Hgh4-_sZdjGBuikPCq8RyoMj8hAIYimyJu5YMZQcjfqpM-9gzlrNnbkR6K1tKhUqG0LNOiglS_rBNNpzzTv68Du5d2xfRHyBRAtPW_h5yDuPyhLqZEI71Za2Rlejt3q0y_Mbxe8GWIR9MdN5S3XxMRuWQ-Y6Dp2w6QT39UdoTfRTOJIBZ7ujesRfouFbBddrAd73qxVhnRhqwuQJU0RnnF6hNdG0ScCfY33G6PWsTnhpg97OQlqhFXplPirAZ4N0'],
-                                ['title' => 'Industrial Bookshelf', 'desc' => 'Wood and metal fusion', 'price' => '$420', 'image' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDO8MWLzNmQKtwL284CkrVb32lkweh9mhlisExgbPCfRsbeXchzPkT9b_plj1KREZo68tJiAWOaq-9QhZ4QpaRmnvjGeomBsC2setJMVn3Y2MRaPDit4A1SDyjz703_jUwF7iaYeovyCVrzYj52DWg8FB-BMNltT7MbVQhvRaYZAm7r0ACxL1I0QIqD-HuQV6N4QDuzJCvJRMci7FrQ-6det4i-p9O4EJggWU_QDgIAyTWgxHsXgY-QhbW9J3-5drSTRQ732FQ6tf0'],
-                            ];
-                        @endphp
-                        @foreach ($products as $product)
+                        @forelse ($featuredProducts as $product)
                             <div class="group flex flex-col bg-white dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
                                 <div class="relative">
-                                    <img alt="{{ $product['title'] }}" class="h-56 w-full object-cover" src="{{ $product['image'] }}" />
+                                    @if($product->image)
+                                        <img alt="{{ $product->name }}" class="h-56 w-full object-cover" src="{{ asset('storage/' . $product->image) }}" />
+                                    @else
+                                        <div class="h-56 w-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                            <span class="text-gray-400">No Image</span>
+                                        </div>
+                                    @endif
                                     <button class="absolute top-3 right-3 flex items-center justify-center size-8 rounded-full bg-white/80 dark:bg-black/50 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors">
                                         <span class="material-symbols-outlined text-xl">favorite</span>
                                     </button>
                                 </div>
                                 <div class="p-4 flex-1 flex flex-col">
-                                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{ $product['title'] }}</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ $product['desc'] }}</p>
+                                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{ $product->name }}</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ \Illuminate\Support\Str::limit($product->description, 50) }}</p>
                                     <div class="flex items-center justify-between mt-4">
-                                        <p class="text-lg font-bold text-primary">{{ $product['price'] }}</p>
+                                        <p class="text-lg font-bold text-primary">₱{{ number_format($product->price, 2) }}</p>
                                         <button class="flex items-center justify-center size-9 bg-primary/20 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
                                             <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="col-span-4 text-center py-12">
+                                <p class="text-gray-500 dark:text-gray-400">No featured products available yet.</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
