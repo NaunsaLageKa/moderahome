@@ -83,14 +83,14 @@
                             <p class="font-semibold">Featured Product</p>
                             <p class="text-sm text-gray-400">Show in featured section</p>
                         </div>
-                        <input type="checkbox" name="is_featured" value="1" {{ $product->is_featured ? 'checked' : '' }} class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 relative">
+                        <input type="checkbox" name="is_featured" value="1" {{ $product->is_featured ? 'checked' : '' }} class="w-5 h-5 bg-gray-700 border-gray-600 rounded text-blue-600 focus:ring-blue-500 focus:ring-2">
                     </label>
                     <label class="flex items-center justify-between p-4 bg-gray-800 rounded-xl border border-gray-700 cursor-pointer">
                         <div>
                             <p class="font-semibold">Active</p>
                             <p class="text-sm text-gray-400">Show this product to customers</p>
                         </div>
-                        <input type="checkbox" name="is_active" value="1" {{ $product->is_active ? 'checked' : '' }} class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 relative">
+                        <input type="checkbox" name="is_active" value="1" {{ $product->is_active ? 'checked' : '' }} class="w-5 h-5 bg-gray-700 border-gray-600 rounded text-blue-600 focus:ring-blue-500 focus:ring-2">
                     </label>
                 </div>
 

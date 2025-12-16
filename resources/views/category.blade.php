@@ -291,17 +291,28 @@
                     @foreach ($chunk as $product)
                         @if ($product)
                             <article class="product-card">
-                                @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                                @else
-                                    <div style="width:100%;height:220px;background:#E2E8F0;display:flex;align-items:center;justify-content:center;color:#94A3B8;">No Image</div>
-                                @endif
+                                <a href="{{ route('product.show', $product) }}">
+                                    @if($product->image)
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                                    @else
+                                        <div style="width:100%;height:220px;background:#E2E8F0;display:flex;align-items:center;justify-content:center;color:#94A3B8;">No Image</div>
+                                    @endif
+                                </a>
                                 <div class="product-info">
-                                    <h3>{{ $product->name }}</h3>
-                                    <p>{{ \Illuminate\Support\Str::limit($product->description, 60) }}</p>
+                                    <a href="{{ route('product.show', $product) }}">
+                                        <h3>{{ $product->name }}</h3>
+                                        <p>{{ \Illuminate\Support\Str::limit($product->description, 60) }}</p>
+                                    </a>
                                     <div class="product-footer">
                                         <span>₱{{ number_format($product->price, 2) }}</span>
-                                        <button>Add to Cart</button>
+                                        @if($product->stock > 0)
+                                            <form action="{{ route('cart.add', $product) }}" method="POST" style="display:inline;" onclick="event.stopPropagation();">
+                                                @csrf
+                                                <button type="submit">Add to Cart</button>
+                                            </form>
+                                        @else
+                                            <span style="color:#94A3B8;font-size:0.875rem;">Out of Stock</span>
+                                        @endif
                                     </div>
                                 </div>
                             </article>

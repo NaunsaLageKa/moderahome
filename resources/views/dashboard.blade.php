@@ -61,13 +61,17 @@
                     <span class="material-symbols-outlined">dashboard</span>
                     <p class="text-sm font-medium leading-normal">Dashboard</p>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="{{ route('orders.index') }}">
                     <span class="material-symbols-outlined">inventory_2</span>
                     <p class="text-sm font-medium leading-normal">My Orders</p>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="#">
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="{{ route('wishlist.index') }}">
                     <span class="material-symbols-outlined">favorite</span>
                     <p class="text-sm font-medium leading-normal">Wishlist</p>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800" href="{{ route('profile.index') }}">
+                    <span class="material-symbols-outlined">person</span>
+                    <p class="text-sm font-medium leading-normal">Profile</p>
                 </a>
             </nav>
             <div class="flex flex-col gap-1 border-t border-gray-200 dark:border-gray-800 pt-4">
@@ -83,6 +87,10 @@
                     <h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Dashboard</h2>
                 </div>
                 <div class="flex flex-1 justify-end items-center gap-4">
+                    <a href="{{ route('cart.index') }}" class="relative flex cursor-pointer items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <span class="material-symbols-outlined text-xl">shopping_cart</span>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    </a>
                     <button class="flex cursor-pointer items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                         <span class="material-symbols-outlined text-xl">notifications</span>
                     </button>
@@ -99,12 +107,12 @@
                 <div class="max-w-xl mx-auto mb-10 text-center">
                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Hello, {{ Auth::user()->name ?? 'Olivia!' }}</h2>
                     <p class="text-center text-gray-600 dark:text-gray-400 mt-2">What are you looking for today?</p>
-                    <div class="relative mt-6">
+                    <form action="{{ route('search') }}" method="GET" class="relative mt-6">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                             <span class="material-symbols-outlined text-gray-500">search</span>
                         </div>
-                        <input class="w-full h-14 pl-12 pr-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Search for furniture, styles, and more..." type="text" />
-                    </div>
+                        <input name="q" value="{{ request('q') }}" class="w-full h-14 pl-12 pr-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Search for furniture, styles, and more..." type="text" />
+                    </form>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -128,7 +136,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         @forelse ($featuredProducts as $product)
                             <div class="group flex flex-col bg-white dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-                                <div class="relative">
+                                <a href="{{ route('product.show', $product) }}" class="relative">
                                     @if($product->image)
                                         <img alt="{{ $product->name }}" class="h-56 w-full object-cover" src="{{ asset('storage/' . $product->image) }}" />
                                     @else
@@ -136,18 +144,30 @@
                                             <span class="text-gray-400">No Image</span>
                                         </div>
                                     @endif
-                                    <button class="absolute top-3 right-3 flex items-center justify-center size-8 rounded-full bg-white/80 dark:bg-black/50 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors">
-                                        <span class="material-symbols-outlined text-xl">favorite</span>
-                                    </button>
-                                </div>
+                                    <form action="{{ route('wishlist.add', $product) }}" method="POST" class="absolute top-3 right-3" onclick="event.stopPropagation(); event.preventDefault(); this.submit();">
+                                        @csrf
+                                        <button type="submit" class="flex items-center justify-center size-8 rounded-full bg-white/80 dark:bg-black/50 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors">
+                                            <span class="material-symbols-outlined text-xl">favorite</span>
+                                        </button>
+                                    </form>
+                                </a>
                                 <div class="p-4 flex-1 flex flex-col">
-                                    <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{ $product->name }}</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ \Illuminate\Support\Str::limit($product->description, 50) }}</p>
+                                    <a href="{{ route('product.show', $product) }}" class="block">
+                                        <h3 class="text-base font-semibold text-gray-900 dark:text-white hover:text-primary transition">{{ $product->name }}</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ \Illuminate\Support\Str::limit($product->description, 50) }}</p>
+                                    </a>
                                     <div class="flex items-center justify-between mt-4">
                                         <p class="text-lg font-bold text-primary">₱{{ number_format($product->price, 2) }}</p>
-                                        <button class="flex items-center justify-center size-9 bg-primary/20 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
-                                            <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                                        </button>
+                                        @if($product->stock > 0)
+                                            <form action="{{ route('cart.add', $product) }}" method="POST" onclick="event.stopPropagation();">
+                                                @csrf
+                                                <button type="submit" class="flex items-center justify-center size-9 bg-primary/20 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
+                                                    <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <span class="text-sm text-red-500">Out of Stock</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -161,6 +181,18 @@
             </div>
         </main>
     </div>
+
+    <script>
+        // Load cart count
+        fetch('{{ route("cart.count") }}')
+            .then(response => response.json())
+            .then(data => {
+                if (data.count > 0) {
+                    document.getElementById('cartCount').textContent = data.count;
+                    document.getElementById('cartCount').classList.remove('hidden');
+                }
+            });
+    </script>
 </body>
 </html>
 

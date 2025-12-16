@@ -50,7 +50,6 @@
             <div class="mb-6">
                 <p class="greeting-time">{{ now()->format('l, F j') }}</p>
                 <h2 class="text-3xl font-bold mt-1">Good {{ now()->hour < 12 ? 'Morning' : (now()->hour < 18 ? 'Afternoon' : 'Evening') }}</h2>
-                <p class="text-gray-400 mt-1">Overview of your curated collection performance.</p>
             </div>
 
             <!-- Key Metrics -->
@@ -101,7 +100,7 @@
                     <p class="font-semibold">Orders</p>
                 </a>
                 <a href="{{ route('admin.categories.index') }}" class="quick-action text-center">
-                    <p class="font-semibold">Campaigns</p>
+                    <p class="font-semibold">Categories</p>
                 </a>
                 <a href="{{ route('admin.dashboard') }}" class="quick-action text-center">
                     <p class="font-semibold">Analytics</p>
@@ -158,21 +157,23 @@
                     @if($recent_orders->count() > 0)
                         <div class="space-y-3">
                             @foreach($recent_orders as $order)
-                                <div class="order-card">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-sm font-semibold">ORD-{{ $order->id }}</span>
-                                        <span class="status-badge 
-                                            @if($order->status == 'pending') bg-yellow-500/20 text-yellow-400
-                                            @elseif($order->status == 'processing') bg-blue-500/20 text-blue-400
-                                            @elseif($order->status == 'shipped') bg-purple-500/20 text-purple-400
-                                            @elseif($order->status == 'delivered') bg-green-500/20 text-green-400
-                                            @else bg-red-500/20 text-red-400
-                                            @endif">
-                                            {{ strtoupper($order->status) }}
-                                        </span>
+                                <div class="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-sm font-semibold text-white">ORD-{{ $order->id }}</span>
+                                            <span class="status-badge 
+                                                @if($order->status == 'pending') bg-yellow-500/20 text-yellow-400
+                                                @elseif($order->status == 'processing') bg-blue-500/20 text-blue-400
+                                                @elseif($order->status == 'shipped') bg-purple-500/20 text-purple-400
+                                                @elseif($order->status == 'delivered') bg-green-500/20 text-green-400
+                                                @else bg-red-500/20 text-red-400
+                                                @endif">
+                                                {{ strtoupper($order->status) }}
+                                            </span>
+                                        </div>
+                                        <p class="text-sm text-gray-300">{{ $order->user->name }}</p>
+                                        <p class="text-sm font-semibold text-white mt-1">₱{{ number_format($order->total, 2) }}</p>
                                     </div>
-                                    <p class="text-sm text-gray-400">{{ $order->user->name }}</p>
-                                    <p class="text-sm font-semibold mt-1">₱{{ number_format($order->total, 2) }}</p>
                                 </div>
                             @endforeach
                         </div>
